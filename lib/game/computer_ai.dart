@@ -22,7 +22,6 @@ class ComputerAI {
     if (_nextTargets.isNotEmpty) {
       return _nextTargets.removeLast();
     }
-
     return _availableShots.removeLast();
   }
 
@@ -31,7 +30,6 @@ class ComputerAI {
       _hitShots.add(shot);
       _addAdjacentTargets(shot);
     }
-
     _availableShots.remove(shot);
   }
 
@@ -48,7 +46,6 @@ class ComputerAI {
         _nextTargets.add(target);
       }
     }
-
     _nextTargets.shuffle(random);
   }
 

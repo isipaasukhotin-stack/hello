@@ -54,6 +54,7 @@ class GameBoard {
     if (!canPlaceShip(x, y, shipSize, isHorizontal)) {
       return false;
     }
+
     _placeShip(
       x,
       y,
@@ -74,7 +75,6 @@ class GameBoard {
     for (int i = -1; i <= shipSize; i++) {
       for (int j = -1; j <= 1; j++) {
         int checkX, checkY;
-
         if (isHorizontal) {
           checkX = x + i;
           checkY = y + j;
@@ -90,7 +90,6 @@ class GameBoard {
         }
       }
     }
-
     return true;
   }
 
@@ -98,7 +97,6 @@ class GameBoard {
     for (int i = 0; i < shipSize; i++) {
       int shipX = isHorizontal ? x + i : x;
       int shipY = isHorizontal ? y : y + i;
-
       grid[shipY][shipX] = CellState.ship;
       ships[shipY][shipX] = ship;
     }
@@ -165,7 +163,28 @@ class GameBoard {
       }
       print('');
     }
-
     print('\nЛегенда: ~ - вода, O - корабль, X - попадание, • - промах');
+  }
+
+  // Новый метод для получения количества оставшихся клеток кораблей
+  int getTotalRemainingShipCells() {
+    int count = 0;
+    for (int y = 0; y < size; y++) {
+      for (int x = 0; x < size; x++) {
+        if (grid[y][x] == CellState.ship) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  // Новый метод для получения исходного количества клеток кораблей
+  int getTotalInitialShipCells() {
+    int count = 0;
+    for (var ship in placedShips) {
+      count += ship.size;
+    }
+    return count;
   }
 }
